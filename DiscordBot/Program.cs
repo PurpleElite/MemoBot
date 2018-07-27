@@ -14,6 +14,7 @@ namespace DiscordBot
     public static class Program
     {
         public static DiscordSocketClient Client { get; private set; }
+        public static InputHandler inputHandler = new InputHandler();
 
         public static void Main(string[] args)
         {
@@ -43,17 +44,13 @@ namespace DiscordBot
         /// </summary>
         private static async Task MessageReceived(SocketMessage message)
         {
-            // We ignore any messages that aren't from users or are written by this bot.
-            if (message.Source != MessageSource.User || message.Author.Id == Client.CurrentUser.Id)
+            // We ignore any messages that aren't from users, are written by this bot, or don't have the proper prefix.
+            if (message.Source != MessageSource.User || message.Author.Id == Client.CurrentUser.Id || message.Content[0] != '+')
             {
                 return;
             }
 
-            // Be nice and say hello!
-            if (message.Content.ToLower() == "hi")
-            {
-                message.Channel.SendMessageAsync("Hi " + message.Author.Username + "!");
-            }
+            inputHandler.Input(message);
 
             return;
         }
