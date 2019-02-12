@@ -6,13 +6,17 @@ using System.Threading.Tasks;
 
 namespace DiscordBot
 {
-    class Contestant
+    public class Contestant
     {
-        public String Name { get; private set; }
+        public enum State : int { Alive, Dead };
+        public string Name { get; private set; }
+        public State Status;
 
-        public Contestant (String name)
+
+        public Contestant (string name)
         {
             Name = name;
+            Status = State.Alive;
         }
     }
 }

@@ -11,16 +11,33 @@ namespace DiscordBot
     /// </summary>
     public class InstanceHandler
     {
-        public Game activeGame { get; private set; }
+        public Game ActiveGame { get; private set; }
 
         public InstanceHandler()
         {
-            activeGame = new Game();
+            ActiveGame = new Game();
         }
 
-        public bool AddContestant (Contestant contestant)
+        public Output AddContestant(Contestant contestant)
         {
-            return activeGame.AddContestant(contestant);
+            return ActiveGame.AddContestant(contestant);
+        }
+
+        public Output Proceed()
+        {
+            if (ActiveGame.Day == 0)
+            {
+                return ActiveGame.Start();
+            }
+            else
+            {
+                return ActiveGame.Continue();
+            }
+        }
+
+        public Output ListContestants()
+        {
+            return ActiveGame.ListContestants();
         }
     }
 }
