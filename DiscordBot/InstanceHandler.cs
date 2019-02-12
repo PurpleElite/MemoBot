@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace DiscordBot
 {
     /// <summary>
-    /// Handles instances of active games.
+    /// Handles instances of active games. Currently it doesn't do much because there is only ever one active game.
     /// </summary>
     public class InstanceHandler
     {

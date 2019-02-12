@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiscordBot
 {
+    /// <summary>
+    /// Contestant object. Keeps track of a contestant's attributes and equipment.
+    /// </summary>
     public class Contestant
     {
         public enum State : int { Alive, Dead };

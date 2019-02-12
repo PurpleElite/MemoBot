@@ -13,6 +13,9 @@ using System.Drawing.Imaging;
 
 namespace DiscordBot
 {
+    /// <summary>
+    /// Entry to the program. Handles discord communication.
+    /// </summary>
     public static class Program
     {
         public static DiscordSocketClient Client { get; private set; }

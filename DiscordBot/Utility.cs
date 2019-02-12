@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace DiscordBot
 {
+    /// <summary>
+    /// This class contains a variety of utility functions and helpers.
+    /// </summary>
     public static class Utility
     {
         public static Random Rand = new Random();
