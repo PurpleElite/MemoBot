@@ -6,17 +6,20 @@ using System.Threading.Tasks;
 
 namespace DiscordBot
 {
-    public class GameEventSlot
+    /// <summary>
+    /// Slot for string interpolation in GameEvent flavortext
+    /// </summary>
+    public class Slot
     {
         public Contestant Contestant;
         public int Index;
 
-        public GameEventSlot(int index)
+        public Slot(int index)
         {
             Index = index;
         }
 
-        public GameEventSlot()
+        public Slot()
         {
             Index = 0;
         }

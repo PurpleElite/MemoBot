@@ -89,6 +89,22 @@ namespace DiscordBot
             int maxDead = Math.Min(contestants.Count(), contestants.Count() / 2);
             // Randomize the number of deaths
             int numDead = Utility.Rand.Next(1, maxDead);
+            int numEventSlots = 0;
+
+            List<GameEvent> events = new List<GameEvent>();
+            // Randomly choose lethal events corresponding with the number of deaths
+            while (numDead > 0)
+            {
+                int numVictims = Utility.Rand.Next(1, numDead + 1);
+                // Find an event with the right number of deaths --This function is a mess, clean it up a little later--
+                var selectedEvent = (from gameEvent in GameEventLibrary.GameEvents
+                                     where gameEvent.Killers.Length == numVictims && gameEvent.PlayerCount + numEventSlots <= contestants.Count()
+                                     select gameEvent).First();
+                events.Add(selectedEvent);
+                numEventSlots += selectedEvent.PlayerCount;
+                numDead -= numVictims;
+            }
+
             // Randomly choose victims
             while (numDead > 0)
             {

@@ -203,6 +203,9 @@
   <ItemGroup>
     <Compile Include="Contestant.cs" />
     <Compile Include="Game.cs" />
+    <Compile Include="GameEvent.cs" />
+    <Compile Include="GameEventLibrary.cs" />
+    <Compile Include="Slot.cs" />
     <Compile Include="IOHandler.cs" />
     <Compile Include="InstanceHandler.cs" />
     <Compile Include="Output.cs" />

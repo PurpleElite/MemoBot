@@ -14,19 +14,39 @@ namespace DiscordBot
     {
         private FormattableString flavorText;
         public int PlayerCount { get; private set; }
-        private List<int> killers;
-        private List<int> killed;
+        public int[] Killed { get; private set; }
+        public int[] Killers { get; private set; }
+
+        public GameEvent(FormattableString flavorText, int playerCount, int[] killed, int[] killers)
+        {
+            this.flavorText = flavorText;
+            PlayerCount = playerCount;
+            this.Killed = killed;
+            this.Killers = killers;
+        }
+
+        public GameEvent(FormattableString flavorText, int playerCount, int[] killed)
+        {
+            this.flavorText = flavorText;
+            PlayerCount = playerCount;
+            this.Killed = killed;
+            Killers = new int[0];
+        }
 
         public GameEvent(FormattableString flavorText, int playerCount)
         {
             this.flavorText = flavorText;
             PlayerCount = playerCount;
+            Killed = new int[0];
+            Killers = new int[0];
         }
 
         public GameEvent(FormattableString flavorText)
         {
             this.flavorText = flavorText;
             PlayerCount = 1;
+            Killed = new int[0];
+            Killers = new int[0];
         }
 
 
@@ -43,22 +63,22 @@ namespace DiscordBot
             }
 
             // Insert participants into the flavor text
-            foreach (GameEventSlot slot in flavorText.GetArguments())
+            foreach (Slot slot in flavorText.GetArguments())
             {
                 slot.Contestant = participants[slot.Index];
             }
 
             // Kill off the victims (if any) and attribute the kills to any killers
             int i = 0;
-            foreach (var killedID in killed)
+            foreach (var killedID in Killed)
             {
                 var victim = participants[killedID];
                 victim.Die();
-                if (killers.Count != 0)
+                if (Killers.Length != 0)
                 { 
-                    participants[killers[i]].AddKill(victim);
+                    participants[Killers[i]].AddKill(victim);
                     i++;
-                    i %= killers.Count;
+                    i %= Killers.Length;
                 }
             }
 
